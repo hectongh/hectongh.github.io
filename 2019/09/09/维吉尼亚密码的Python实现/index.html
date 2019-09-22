@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="编译原理随记," />
+  <meta name="keywords" content="现代密码学," />
 
 
 
@@ -79,18 +79,23 @@
 
 
 
-<meta name="description" content="翻译程序1.功能    源程序-&amp;gt;翻译程序-&amp;gt;目标程序（目标代码）    翻译程序有三种：编译程序、解释程序、汇编程序">
-<meta name="keywords" content="编译原理随记">
+<meta name="description" content="0x00 序代换密码体制的一般定义为M=C=K=Z26，其中M为明文空间、C为密文空间、K为密钥空间、Z26为26个整数(对应26个英文字母)组成的空间；要求26个字母与模26的剩余类集合{0,1,2,…,25}建立一一对应的关系。">
+<meta name="keywords" content="现代密码学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编译原理（一）">
-<meta property="og:url" content="http://whosurdaddy.ml/2019/04/01/编译原理（一）/index.html">
+<meta property="og:title" content="维吉尼亚密码的Python实现">
+<meta property="og:url" content="http://whosurdaddy.ml/2019/09/09/维吉尼亚密码的Python实现/index.html">
 <meta property="og:site_name" content="Coda&#39;s Blog">
-<meta property="og:description" content="翻译程序1.功能    源程序-&amp;gt;翻译程序-&amp;gt;目标程序（目标代码）    翻译程序有三种：编译程序、解释程序、汇编程序">
+<meta property="og:description" content="0x00 序代换密码体制的一般定义为M=C=K=Z26，其中M为明文空间、C为密文空间、K为密钥空间、Z26为26个整数(对应26个英文字母)组成的空间；要求26个字母与模26的剩余类集合{0,1,2,…,25}建立一一对应的关系。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://whosurdaddy.ml/2019/09/09/维吉尼亚密码的Python实现/Vigenenre.png">
+<meta property="og:image" content="http://whosurdaddy.ml/2019/09/09/维吉尼亚密码的Python实现/03.png">
+<meta property="og:image" content="http://whosurdaddy.ml/2019/09/09/维吉尼亚密码的Python实现/01.png">
+<meta property="og:image" content="http://whosurdaddy.ml/2019/09/09/维吉尼亚密码的Python实现/02.png">
 <meta property="og:updated_time" content="2019-03-17T04:25:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="编译原理（一）">
-<meta name="twitter:description" content="翻译程序1.功能    源程序-&amp;gt;翻译程序-&amp;gt;目标程序（目标代码）    翻译程序有三种：编译程序、解释程序、汇编程序">
+<meta name="twitter:title" content="维吉尼亚密码的Python实现">
+<meta name="twitter:description" content="0x00 序代换密码体制的一般定义为M=C=K=Z26，其中M为明文空间、C为密文空间、K为密钥空间、Z26为26个整数(对应26个英文字母)组成的空间；要求26个字母与模26的剩余类集合{0,1,2,…,25}建立一一对应的关系。">
+<meta name="twitter:image" content="http://whosurdaddy.ml/2019/09/09/维吉尼亚密码的Python实现/Vigenenre.png">
 
 
 
@@ -120,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://whosurdaddy.ml/2019/04/01/编译原理（一）/"/>
+  <link rel="canonical" href="http://whosurdaddy.ml/2019/09/09/维吉尼亚密码的Python实现/"/>
 
 
 
 
 
-  <title>编译原理（一） | Coda's Blog</title>
+  <title>维吉尼亚密码的Python实现 | Coda's Blog</title>
   
 
 
@@ -287,7 +292,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://whosurdaddy.ml/2019/04/01/编译原理（一）/">
+    <link itemprop="mainEntityOfPage" href="http://whosurdaddy.ml/2019/09/09/维吉尼亚密码的Python实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hector">
@@ -304,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">编译原理（一）</h1>
+          <h1 class="post-title" itemprop="name headline">维吉尼亚密码的Python实现</h1>
         
 
         <div class="post-meta">
@@ -316,8 +321,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-01T10:41:12+08:00">
-                2019-04-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-09T11:42:01+08:00">
+                2019-09-09
               </time>
             
 
@@ -335,8 +340,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/01/编译原理（一）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/01/编译原理（一）/" itemprop="commentCount"></span>
+                <a href="/2019/09/09/维吉尼亚密码的Python实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/09/维吉尼亚密码的Python实现/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -344,7 +349,7 @@
 
           
           
-             <span id="/2019/04/01/编译原理（一）/" class="leancloud_visitors" data-flag-title="编译原理（一）">
+             <span id="/2019/09/09/维吉尼亚密码的Python实现/" class="leancloud_visitors" data-flag-title="维吉尼亚密码的Python实现">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -375,43 +380,45 @@
       
 
       
-        <h1 id="翻译程序"><a href="#翻译程序" class="headerlink" title="翻译程序"></a>翻译程序</h1><p>1.功能  </p>
-<blockquote>
-<p>源程序-&gt;翻译程序-&gt;目标程序（目标代码）  </p>
-</blockquote>
-<p>翻译程序有三种：编译程序、解释程序、汇编程序  </p>
+        <h1 id="0x00-序"><a href="#0x00-序" class="headerlink" title="0x00 序"></a>0x00 序</h1><p>代换密码体制的一般定义为M=C=K=Z26，其中M为明文空间、C为密文空间、K为密钥空间、Z26为26个整数(对应26个英文字母)组成的空间；要求26个字母与模26的剩余类集合{0,1,2,…,25}建立一一对应的关系。  </p>
 <a id="more"></a>
-<p>2.基本结构<br>源程序想要翻译成为目标程序需要下面基本五部分：  </p>
+<p>0x01 移位密码<br>移位密码的加密实际上就是将26个英文字母向后循环移动k位，其加密解密可表示为：<br>c=Ek(m)=m+k(mod 26)  </p>
+<p>m=Dk(c)=c-k(mod 26)  </p>
+<p>其中，m、c、k是满足0≤m,c,k≤25的整数。</p>
+<h1 id="0x01-凯撒密码"><a href="#0x01-凯撒密码" class="headerlink" title="0x01 凯撒密码"></a>0x01 凯撒密码</h1><p>恺撒密码的替换方法是通过排列明文和密文字母表，密文字母表示通过将明文字母表向左或向右移动一个固定数目的位置。例如，当偏移量是左移3的时候（解密时的密钥就是3）：  </p>
 <blockquote>
-<p>词法分析  </p>
+<p>明文：THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG<br>密文：WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ</p>
+</blockquote>
+<p>恺撒密码的加密、解密方法还能够通过同余的数学方法进行计算。首先将字母用数字代替，A=0，B=1，…，Z=25。此时偏移量为n的加密方法即为：</p>
 <blockquote>
-<p>对构成输入的源程序的字符串进行扫描和分解，识别出一个个单词和符号，如标识符、常数、界限符等。</p>
+<p>E{n}(x)=(x+n)\mod 26} </p>
 </blockquote>
-</blockquote>
+<p>解密就是：  </p>
 <blockquote>
-<p>语法分析  </p>
+<p>D{n}(x)=(x-n)\mod 26}</p>
+</blockquote>
+<h1 id="0x02-维吉尼亚密码"><a href="#0x02-维吉尼亚密码" class="headerlink" title="0x02 维吉尼亚密码"></a>0x02 维吉尼亚密码</h1><p>Vigenenre密码是最著名的多表代换密码，是16世纪法国著名密码学家Vigenenre发明的。Vigenenre密码使用一个词组作为密钥，密钥中每一个字母用来确定一个代换表，每一个密钥字母被用来加密一个明文字母，第一个密钥字母加密第一个明文字母，第二个密钥字母加密第二个明文字母，等所有密钥字母使用完后，密钥再次循环使用，于是加解密前需先将明密文按照密钥长度进行分组。密码算法可表示如下：</p>
+<p>设密钥K=(k1,k2,…,kd)，明文M=(m1,m2,…,mn)，密文C=(c1,c2,…,cn)；</p>
+<p>加密变换为：</p>
 <blockquote>
-<p>在词法分析的基础上，根据语言的语法规则，把单词符号分解成各类语法单位（语法范畴），如短语、句子、程序段等。</p>
+<p>ci=Eki(mi)=mi+ki(mod 26)</p>
 </blockquote>
-</blockquote>
+<p>解密变换为： </p>
 <blockquote>
-<p>语义分析和中间代码生成  </p>
-<blockquote>
-<p>首先对各种语法范畴进行静态语义检查，如果正确则进行中间代码的翻译。该阶段遵循的是语言的语义规则，通常使用属性文法描述语义规则。中间代码的形式有四元式、三元式、逆波兰式和树形表示。</p>
+<p>mi=Dki(ci)=ci-ki(mod 26)</p>
 </blockquote>
-</blockquote>
-<blockquote>
-<p>代码优化  </p>
-<blockquote>
-<p>优化所遵循的是程序的等价变换原则。其方法有公共子表达式的提取、循环优化、删除无用代码等。</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>目标代码生成  </p>
-<blockquote>
-<p>把中间代码（或经优化处理后）变换成特定机器上的低级语言代码。它有赖于硬件系统结构和机器指令的含义。</p>
-</blockquote>
-</blockquote>
+<p>通常通过查询维吉尼亚表进行加解密。  </p>
+<img src="/2019/09/09/维吉尼亚密码的Python实现/Vigenenre.png">  
+<p>0x04 以下为维吉尼亚密码的Python实现。  </p>
+<figure class="highlight python"><figcaption><span>main.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># author:Hector</span></span><br><span class="line"><span class="comment"># datetime:20:13</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#维吉尼亚</span></span><br><span class="line"><span class="keyword">import</span> VigenereDecrypto</span><br><span class="line"><span class="keyword">import</span> VigenereEncrypto</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    info = <span class="string">'''==========********=========='''</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 开始加密</span></span><br><span class="line">    print(info, <span class="string">"\n------维吉尼亚加密算法------"</span>)</span><br><span class="line">    print(info)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取测试文本文档：傲慢与偏见第一卷第一节</span></span><br><span class="line">    message = open(<span class="string">"test.txt"</span>,<span class="string">"r+"</span>).read()</span><br><span class="line">    print(<span class="string">"读取测试文本文档:test.txt......"</span>)</span><br><span class="line">    print(<span class="string">"开始加密！"</span>)</span><br><span class="line">    <span class="comment"># 输入key</span></span><br><span class="line">    key = input(<span class="string">"请输入密钥："</span>)</span><br><span class="line">    <span class="comment"># 进入加密算法</span></span><br><span class="line">    CipherText = VigenereEncrypto.VigenereEncrypto(message, key)</span><br><span class="line">    <span class="comment"># 写入密文文本文档</span></span><br><span class="line">    C = open(<span class="string">"CipherText.txt"</span>, <span class="string">"w+"</span>)</span><br><span class="line">    C.write(CipherText)</span><br><span class="line">    C.close()</span><br><span class="line">    print(<span class="string">"加密后得到的密文是: \n"</span> + CipherText)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 开始解密</span></span><br><span class="line">    print(info, <span class="string">"\n------维吉尼亚解密算法------"</span>)</span><br><span class="line">    print(info)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 读取加密文本文档</span></span><br><span class="line">    print(<span class="string">"读取密文文本文档：CipherText.txt......"</span>)</span><br><span class="line">    Ciphertext = open(<span class="string">"CipherText.txt"</span>, <span class="string">"r+"</span>).read()</span><br><span class="line">    <span class="comment"># 进入解密算法</span></span><br><span class="line">    print(<span class="string">"开始解密！"</span>)</span><br><span class="line">    Plaintext = VigenereDecrypto.VigenereDecrypto(Ciphertext, key)</span><br><span class="line">    P = open(<span class="string">"PlainText.txt"</span>, <span class="string">"w+"</span>)</span><br><span class="line">    <span class="comment"># 写入解密文本文档</span></span><br><span class="line">    P.write(Plaintext)</span><br><span class="line">    P.close()</span><br><span class="line">    print(<span class="string">"解密后得到的明文是 : \n"</span> + Plaintext)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>  
+<figure class="highlight python"><figcaption><span>VigenereEncrypto.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># author:Hector</span></span><br><span class="line"><span class="comment"># datetime:20:14</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">VigenereEncrypto</span><span class="params">(message, key)</span>:</span></span><br><span class="line">    msLen = len(message)</span><br><span class="line">    keyLen = len(key)</span><br><span class="line">    message = message.upper()</span><br><span class="line">    key = key.upper()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 明文空间</span></span><br><span class="line">    raw = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定义加密后的字符串</span></span><br><span class="line">    ciphertext = <span class="string">""</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 开始加密</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, msLen):</span><br><span class="line">        <span class="comment"># 轮询key的字符</span></span><br><span class="line">        j = i % keyLen</span><br><span class="line">        <span class="comment"># encode</span></span><br><span class="line">        <span class="comment"># 判断字符是否为英文字符，不是则直接向后面追加且继续</span></span><br><span class="line">        <span class="keyword">if</span> message[i] <span class="keyword">not</span> <span class="keyword">in</span> raw:</span><br><span class="line">            ciphertext += message[i]</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        encodechr = chr((ord(message[i]) - ord(<span class="string">"A"</span>) + ord(key[j]) - ord(<span class="string">"A"</span>)) % <span class="number">26</span> + ord(<span class="string">"A"</span>))</span><br><span class="line">        <span class="comment"># 追加字符</span></span><br><span class="line">        ciphertext += encodechr</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 返回加密后的字符串</span></span><br><span class="line">    <span class="keyword">return</span> ciphertext</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    message = <span class="string">"Hello, World!"</span></span><br><span class="line">    key = <span class="string">"key"</span></span><br><span class="line">    text = VigenereEncrypto(message, key)</span><br><span class="line">    print(text)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><figcaption><span>VigenereDecrypto.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># author:Hector</span></span><br><span class="line"><span class="comment"># datetime:20:14</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">VigenereDecrypto</span><span class="params">(ciphertext, key)</span>:</span></span><br><span class="line">    msLen = len(ciphertext)</span><br><span class="line">    keyLen = len(key)</span><br><span class="line">    key = key.upper()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 密文空间</span></span><br><span class="line">    raw = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span></span><br><span class="line"></span><br><span class="line">    plaintext = <span class="string">""</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 开始解密</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, msLen):</span><br><span class="line">        <span class="comment"># 轮询key的字符</span></span><br><span class="line">        j = i % keyLen</span><br><span class="line">        <span class="comment"># encode</span></span><br><span class="line">        <span class="comment"># 判断字符是否为英文字符，不是则直接向后面追加且继续</span></span><br><span class="line">        <span class="keyword">if</span> ciphertext[i] <span class="keyword">not</span> <span class="keyword">in</span> raw:</span><br><span class="line">            plaintext += ciphertext[i]</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        decodechr = chr((ord(ciphertext[i]) - ord(<span class="string">"A"</span>) - ord(key[j]) - ord(<span class="string">"A"</span>)) % <span class="number">26</span> + ord(<span class="string">"A"</span>))</span><br><span class="line">        <span class="comment"># 追加字符</span></span><br><span class="line">        plaintext += decodechr</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 返回加密后的字符串</span></span><br><span class="line">    <span class="keyword">return</span> plaintext</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    ciphertext = <span class="string">"RIJVS, AMBPB!"</span></span><br><span class="line">    key = <span class="string">"key"</span></span><br><span class="line">    text = VigenereDecrypto(ciphertext, key)</span><br><span class="line">    print(text)</span><br></pre></td></tr></table></figure>
+<h1 id="0x03-测试"><a href="#0x03-测试" class="headerlink" title="0x03 测试"></a>0x03 测试</h1><p>测试使用的文本<br><img src="/2019/09/09/维吉尼亚密码的Python实现/03.png"> </p>
+<p>加密后的明文：</p>
+<img src="/2019/09/09/维吉尼亚密码的Python实现/01.png">  
+<p>解密后的密文</p>
+<img src="/2019/09/09/维吉尼亚密码的Python实现/02.png">  
+<p>参考链接：<a href="https://www.cnblogs.com/maoguy/p/6002510.html" target="_blank" rel="noopener">维吉尼亚密码</a></p>
 
       
     </div>
@@ -458,7 +465,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/编译原理随记/" rel="tag"># 编译原理随记</a>
+            <a href="/tags/现代密码学/" rel="tag"># 现代密码学</a>
           
         </div>
       
@@ -471,8 +478,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/01/维吉尼亚密码的Python实现/" rel="next" title="维吉尼亚密码的Python实现">
-                <i class="fa fa-chevron-left"></i> 维吉尼亚密码的Python实现
+              <a href="/2019/09/09/各种CTF练手网站/" rel="next" title="各种CTF练手网站">
+                <i class="fa fa-chevron-left"></i> 各种CTF练手网站
               </a>
             
           </div>
@@ -480,6 +487,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/09/编译原理（一）/" rel="prev" title="编译原理（一）">
+                编译原理（一） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -563,7 +574,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -576,7 +587,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -645,7 +656,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#翻译程序"><span class="nav-number">1.</span> <span class="nav-text">翻译程序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-序"><span class="nav-number">1.</span> <span class="nav-text">0x00 序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-凯撒密码"><span class="nav-number">2.</span> <span class="nav-text">0x01 凯撒密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-维吉尼亚密码"><span class="nav-number">3.</span> <span class="nav-text">0x02 维吉尼亚密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-测试"><span class="nav-number">4.</span> <span class="nav-text">0x03 测试</span></a></li></ol></div>
             
 
           </div>
