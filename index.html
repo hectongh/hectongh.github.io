@@ -287,6 +287,474 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://whosurdaddy.ml/2019/09/23/SQLMap使用要点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hector">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/about/index/logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coda's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/23/SQLMap使用要点/" itemprop="url">SQLMap使用要点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-23T13:18:42+08:00">
+                2019-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/23/SQLMap使用要点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/23/SQLMap使用要点/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/09/23/SQLMap使用要点/" class="leancloud_visitors" data-flag-title="SQLMap使用要点">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>注入技术：  </p>
+<ul>
+<li>基于布尔类型的盲注。  </li>
+<li>基于时间的盲注。  </li>
+<li>基于报错注入。  </li>
+<li>联合查询注入。  </li>
+<li>堆查询注入。  </li>
+</ul>
+<img src="/2019/09/23/SQLMap使用要点/sql.png">
+<h1 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h1><ol>
+<li>判断是否存在注入  <blockquote>
+<p>sqlmap -u {URL} </p>
+</blockquote>
+</li>
+</ol>
+<p>注入点参数&gt;=2时，需要添加双引号：  </p>
+<blockquote>
+<p>sqlmap -u “{URL}”</p>
+</blockquote>
+<ol start="2">
+<li><p>判断文本中的请求是否存在注入<br>直接从文本文件中获取HTTP请求，无需设置cookie、POST等参数。  </p>
+<blockquote>
+<p>sqlmap -r {FILE_PATH}</p>
+</blockquote>
+</li>
+<li><p>查询参数</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">缩写</th>
+<th style="text-align:center">含义</th>
+<th style="text-align:center">备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">- -dbs</td>
+<td style="text-align:center">-D</td>
+<td style="text-align:center">数据库名</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">- -tables</td>
+<td style="text-align:center">-T</td>
+<td style="text-align:center">表名</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">- -columns</td>
+<td style="text-align:center">-C</td>
+<td style="text-align:center">字段名</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">- -dump</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">获取具体信息</td>
+<td style="text-align:center">需要指定前三个参数  </td>
+</tr>
+<tr>
+<td style="text-align:center">- -users</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">列出所有管理用户</td>
+<td style="text-align:center">当前用户有权限读取包含所有用户的表  </td>
+</tr>
+<tr>
+<td style="text-align:center">- -passwords</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">列出数据库用户密码</td>
+<td style="text-align:center">当前用户有权限读取包含用户密码的表  </td>
+</tr>
+<tr>
+<td style="text-align:center">- -current-db</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">列出当前使用的数据库</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">- -current-user</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">列出当前使用的数据库用户</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">含义</th>
+<th style="text-align:center">备注</th>
+<th style="text-align:center">示例    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">- -level 5</td>
+<td style="text-align:center">执行的测试等级，越高越全面</td>
+<td style="text-align:center">一级：GET、POST，二级：cookie，三级：User-Agent、Referer，五级：全部测试</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">- -is-dba</td>
+<td style="text-align:center">是否为管理权限</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">- -roles</td>
+<td style="text-align:center">列出数据库管理员账号</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">- -referer</td>
+<td style="text-align:center">HTTP Referer头</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">- -referer <a href="http://www.examples.com" target="_blank" rel="noopener">http://www.examples.com</a>  </td>
+</tr>
+<tr>
+<td style="text-align:center">- -sql-shell</td>
+<td style="text-align:center">执行制定SQL语句</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">- -os-cmd</td>
+<td style="text-align:center">运行任意操作系统命令</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">- -file-read</td>
+<td style="text-align:center">从数据库服务器中读取数据</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">- -file-read “{FILE_PATH}” -v 1  </td>
+</tr>
+<tr>
+<td style="text-align:center">- -file-write,- -file-dest</td>
+<td style="text-align:center">上传文件到数据库服务器中</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">- -file-write “{SRC_FILE_PATH}” - -file-dest “{DST_FILE_PATH}” -v 1  </td>
+</tr>
+</tbody>
+</table>
+<h1 id="高阶：绕过脚本tamper讲解"><a href="#高阶：绕过脚本tamper讲解" class="headerlink" title="高阶：绕过脚本tamper讲解"></a>高阶：绕过脚本tamper讲解</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">脚本名称</th>
+<th style="text-align:center">作用</th>
+<th style="text-align:center">支持的数据库</th>
+<th style="text-align:center">测试通过的数据库类型和版本  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">apostrophemask.py</td>
+<td style="text-align:center">用utf8代替引号</td>
+<td style="text-align:center">all</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">base64encode.py</td>
+<td style="text-align:center">用base64编码替换</td>
+<td style="text-align:center">all</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">multiplespaces.py</td>
+<td style="text-align:center">围绕SQL关键字添加多个空格</td>
+<td style="text-align:center">all</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">space2plus.py</td>
+<td style="text-align:center">用+替换空格</td>
+<td style="text-align:center">all</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">nonrecursivereplacement.py</td>
+<td style="text-align:center">双重查询语句。取代predefined SQL关键字with表示;suitable for替代（例如  .replace（“SELECT”、””)） filters</td>
+<td style="text-align:center">all</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">space2randomblank.py</td>
+<td style="text-align:center">代替空格字符（“”）从一个随机的空白字符可选字符的有效集</td>
+<td style="text-align:center">all</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">unionalltounion.py</td>
+<td style="text-align:center">替换UNION ALL SELECT UNION SELECT</td>
+<td style="text-align:center">all</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">securesphere.py</td>
+<td style="text-align:center">追加特制的字符串</td>
+<td style="text-align:center">all</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">space2hash.py</td>
+<td style="text-align:center">绕过过滤’=’替换空格字符(“)，(‘–’)后跟一个破折号注释，一个随机字符串和一个新行(‘n’)</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">equaltolike.py</td>
+<td style="text-align:center">like 代替等号</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center">Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5  </td>
+</tr>
+<tr>
+<td style="text-align:center">space2mssqlblank.py</td>
+<td style="text-align:center">空格替换为其它空符号</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center">Microsoft SQL Server 2000、Microsoft SQL Server 2005  </td>
+</tr>
+<tr>
+<td style="text-align:center">space2mssqlhash.py</td>
+<td style="text-align:center">替换空格</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">between.py</td>
+<td style="text-align:center">用between替换大于号(&gt;)</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center">Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0  </td>
+</tr>
+<tr>
+<td style="text-align:center">percentage.py</td>
+<td style="text-align:center">asp允许每个字符前面添加一个%号</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">sp_password.py</td>
+<td style="text-align:center">追加sp_password’从DBMS日志的自动模糊处理的有效载荷的末尾</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">charencode.py</td>
+<td style="text-align:center">url编码</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">randomcase.py</td>
+<td style="text-align:center">随机大小写</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">charunicodeencode.py</td>
+<td style="text-align:center">字符串 unicode 编码</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">space2comment.py</td>
+<td style="text-align:center">使用’/**/‘替换空格</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">greatest.py</td>
+<td style="text-align:center">绕过过滤’&gt;’ ,用GREATEST替换大于号。</td>
+<td style="text-align:center">MYSQLMySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">apostrophenullencode.py</td>
+<td style="text-align:center">绕过过滤双引号，替换字符和双引号。</td>
+<td style="text-align:center">MYSQL</td>
+<td style="text-align:center">MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0  </td>
+</tr>
+<tr>
+<td style="text-align:center">ifnull2ifisnull.py</td>
+<td style="text-align:center">绕过对 IFNULL 过滤。替换类似’IFNULL(A, B)’为’IF(ISNULL(A), B, A)’</td>
+<td style="text-align:center">MYSQL</td>
+<td style="text-align:center">MySQL 5.0 and 5.5  </td>
+</tr>
+<tr>
+<td style="text-align:center">space2mssqlhash.py</td>
+<td style="text-align:center">替换空格</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">modsecurityversioned.py</td>
+<td style="text-align:center">过滤空格，包含完整的查询版本注释</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center">MySQL 5.0  </td>
+</tr>
+<tr>
+<td style="text-align:center">space2mysqlblank.py</td>
+<td style="text-align:center">空格替换其它空白符号</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center">MySQL 5.1  </td>
+</tr>
+<tr>
+<td style="text-align:center">modsecurityzeroversioned.py</td>
+<td style="text-align:center">包含了完整的查询与零版本注释</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center">MySQL 5.0  </td>
+</tr>
+<tr>
+<td style="text-align:center">space2mysqldash.py</td>
+<td style="text-align:center">替换空格字符（”）（’ – ‘）后跟一个破折号注释一个新行（’ n’）</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">bluecoat.py</td>
+<td style="text-align:center">代替空格字符后与一个有效的随机空白字符的SQL语句。然后替换=为like</td>
+<td style="text-align:center">MSSQL</td>
+<td style="text-align:center">MySQL 5.1, SGOS  </td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://whosurdaddy.ml/2019/09/21/渗透测试工程师面试要点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1605,151 +2073,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://whosurdaddy.ml/2018/09/19/咸鱼的信安之路/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hector">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/about/index/logo.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coda's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/19/咸鱼的信安之路/" itemprop="url">咸鱼的信安之路</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-19T22:37:20+08:00">
-                2018-09-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/19/咸鱼的信安之路/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/19/咸鱼的信安之路/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/09/19/咸鱼的信安之路/" class="leancloud_visitors" data-flag-title="咸鱼的信安之路">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>第一次接触到这个领域还是在某次新闻上看到的，说某个人用ATM的漏洞去了多少钱，当时想这个人好NB，我也好想这种将所有东西玩弄于股掌之间的感觉，后来自己上网搜各种资料，大概是高二的时候找了个师傅，教了我一些基本的日站的技巧，不过貌似几个月后，在他日了广州图书馆之后没几天，他就被请去喝茶了，然后就没了消息。。。<br>后来高中毕业了，想着选一个和自己兴趣相近的专业，然后就看到了信息安全，当时感觉新鲜，就试着填报了。结果自然是被录取了，也算是合自己的心意了。  </p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/19/咸鱼的信安之路/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1804,7 +2127,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1817,7 +2140,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
